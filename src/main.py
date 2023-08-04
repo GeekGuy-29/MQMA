@@ -3,8 +3,9 @@ import requests
 import time
 import schedule
 
+
 def core():
-	
+	global c
 	url  = "https://www.oberlo.com/blog/motivational-quotes"
 	result = requests.get(url)
 	doc = BeautifulSoup(result.text, "html.parser")
@@ -18,9 +19,10 @@ def core():
 	print(c)
 	requests.post("https://ntfy.sh/ozonenotifapp",
 	data=quote_list[c].encode(encoding='utf-8'))
+	c=c+1
 c=0
 schedule.every().day.at('05:00').do(core)
-while (c<426):
+while 1:
 	schedule.run_pending()
 	time.sleep(1)
-	c=c+1
+
