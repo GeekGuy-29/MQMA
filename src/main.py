@@ -21,7 +21,7 @@ def core():
 	data=quote_list[c].encode(encoding='utf-8'))
 	c=c+1
 c=0
-schedule.every(5).seconds.do(core)
+schedule.every().day.at('05:00').do(core)
 while 1:
 	schedule.run_pending()
 	time.sleep(1)
